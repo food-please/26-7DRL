@@ -1,0 +1,13 @@
+[gd_resource type="TileSet" format=3 uid="uid://cmwbs5pe8blsp"]
+
+[ext_resource type="Texture2D" uid="uid://b5dv3vd7ba6y6" path="res://assets/dungeon-mode.png" id="1_b78pj"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_36l7d"]
+texture = ExtResource("1_b78pj")
+texture_region_size = Vector2i(8, 8)
+0:11/0 = 0
+0:1/0 = 0
+
+[resource]
+tile_size = Vector2i(8, 8)
+sources/0 = SubResource("TileSetAtlasSource_36l7d")
