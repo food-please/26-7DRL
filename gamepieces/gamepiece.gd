@@ -2,6 +2,7 @@
 @icon("res://gamepieces/icon_gamepiece.png")
 class_name Gamepiece extends Node2D
 
+## Emitted whenever the gamepiece is ready to act.
 signal moved(old_cell: Vector2i)
 
 @export var character: Character:
@@ -22,6 +23,8 @@ signal moved(old_cell: Vector2i)
 		else:
 			sprite.texture = character.texture
 			sprite.modulate = character.colour
+
+var actor: Actor
 
 var cell: Vector2i = Constants.INVALID_CELL:
 	set(value):
@@ -51,10 +54,14 @@ func _ready() -> void:
 	if Map.gameboard == null:
 		await Map.references_set
 	
+	assert(character != null, "Gamepiece %s needs a Character assigned!" % name)
+	assert(character.stats != null, "Gamepiece %s needs Stats assigned!" % name)
+	
 	cell = Map.gameboard.px_to_cell(position)
 	position = Map.gameboard.cell_to_px(cell)
 	print("Moved pos to ", position)
 	
+	actor = Actor.new(character.stats.initiative)
 	if Map.gamepieces.register(self, cell) == false:
 		queue_free()
 
@@ -70,4 +77,5 @@ func _ready() -> void:
 
 
 func _to_string() -> String:
-	return "Gamepiece: %s" % name
+	return "Gamepiece: %s" % name + \
+		"\n\t(Charge = %f)" % actor.charge

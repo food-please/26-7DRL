@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="Stats" format=3 uid="uid://dhpeol2e1t5uw"]
+
+[ext_resource type="Script" uid="uid://b508xrh2wh14p" path="res://gamepieces/characters/character_stats.gd" id="1_8dr7v"]
+
+[resource]
+script = ExtResource("1_8dr7v")
+initiative = 0.7
+metadata/_custom_type_script = "uid://b508xrh2wh14p"

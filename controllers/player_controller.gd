@@ -15,6 +15,7 @@ func _ready() -> void:
 	assert(player_start_position != null, "PlayerController needs a position for the player!")
 	
 	focus = gamepiece_scene.instantiate()
+	focus.name = "Player"
 	focus.character = player_character
 	focus.position = player_start_position.position
 	gp_container.add_child(focus)

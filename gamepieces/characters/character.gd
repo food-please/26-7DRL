@@ -2,6 +2,7 @@
 class_name Character extends Resource
 
 @export var name: String
+@export var stats: Stats
 
 # GFX
 @export_category("GFX")

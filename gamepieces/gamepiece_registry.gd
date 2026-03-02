@@ -1,6 +1,9 @@
 @icon("res://gamepieces/icon_turn_queue.png")
 class_name GamepieceRegistry extends Node
 
+# Multiple actors may finish 'charging' on a given update tick, therefore I'll store them in order.
+var _charged_actors: Array[Gamepiece] = []
+
 # Store all registered gamepeices by the cell they occupy.
 var _gamepieces: Dictionary[Vector2i, Gamepiece] = {}
 
@@ -18,6 +21,7 @@ func register(gamepiece: Gamepiece, cell: Vector2i) -> bool:
 			% [gamepiece.name, str(cell)])
 		return false
 	
+	gamepiece.actor.charged.connect(_on_actor_charged.bind(gamepiece))
 	gamepiece.moved.connect(_on_gamepiece_moved.bind(gamepiece))
 	
 	# We want to know when the gamepiece leaves the scene tree, as it is no longer on the gameboard.
@@ -27,6 +31,32 @@ func register(gamepiece: Gamepiece, cell: Vector2i) -> bool:
 	_gamepieces[cell] = gamepiece
 	print_debug("Registered gamepiece %s at %s." % [gamepiece.name, cell])
 	return true
+
+
+## I'm going to simulate the next several turns to get a list of actors, in order.
+#func tick() -> void:
+	#for gp: Gamepiece in get_children():
+		#gp.actor.tick()
+
+
+func get_next_actor() -> Gamepiece:
+	var next_actor: Gamepiece = null
+	while next_actor == null:
+		if _gamepieces.is_empty():
+			break
+		
+		# First, check to see if there are any Gamepieces lingering in the charged queue.
+		while !_charged_actors.is_empty():
+			next_actor = _charged_actors.pop_front()
+			if next_actor != null and is_instance_valid(next_actor):
+				break
+		
+		# There are no charged actors waiting. Running a game "tick" may make some actors ready.
+		if next_actor == null:
+			for gp: Gamepiece in get_children():
+				gp.actor.tick()
+	
+	return next_actor
 
 
 ## Return the gamepiece, if any,that is found at a given cell.
@@ -59,6 +89,10 @@ func get_gamepieces() -> Array[Gamepiece]:
 	return _gamepieces.values()
 
 
+func _on_actor_charged(gp: Gamepiece) -> void:
+	_charged_actors.append(gp)
+
+
 func _on_gamepiece_moved(old_cell: Vector2i, gp: Gamepiece) -> void:
 	if old_cell == Constants.INVALID_CELL:
 		return
@@ -81,6 +115,12 @@ func _on_gamepiece_tree_exiting(gp: Gamepiece) -> void:
 	
 	#if cell != null:
 		#Events.gamepiece_exiting_tree.emit(gp, cell)
+
+
+func _sort_actors(a: Actor, b: Actor) -> bool:
+	if is_equal_approx(a.charge, b.charge):
+		return b.charge_rate > a.charge_rate
+	return a.charge < b.charge
 
 
 func _to_string() -> String:
