@@ -1,4 +1,5 @@
-class_name GamepieceRegistry extends RefCounted
+@icon("res://gamepieces/icon_turn_queue.png")
+class_name GamepieceRegistry extends Node
 
 # Store all registered gamepeices by the cell they occupy.
 var _gamepieces: Dictionary[Vector2i, Gamepiece] = {}
@@ -35,15 +36,16 @@ func get_gamepiece(cell: Vector2i) -> Gamepiece:
 
 ## Return the gamepiece, if any, that has a given name.
 func get_gamepiece_by_name(gp_name: String) -> Gamepiece:
-	for gp: Gamepiece in _gamepieces.values():
-		if gp.name == gp_name:
-			return gp
-	return null
+	return get_node_or_null(gp_name) as Gamepiece
+	#for gp: Gamepiece in _gamepieces.values():
+		#if gp.name == gp_name:
+			#return gp
+	#return null
 
 
 ## Return the cell occupied by a given gamepiece.
 func get_cell(gp: Gamepiece) -> Vector2i:
-	var cell: = _gamepieces.find_key(gp) as Vector2i
+	var cell = _gamepieces.find_key(gp) as Vector2i
 	if _gamepieces.has(cell):
 		return cell
 	return Constants.INVALID_CELL

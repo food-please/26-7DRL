@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Character" format=3 uid="uid://ccsm0d80dmsjp"]
+
+[ext_resource type="Script" uid="uid://bexn684efuhpn" path="res://gamepieces/characters/character.gd" id="1_s14we"]
+[ext_resource type="Texture2D" uid="uid://3t11rrg0vpx4" path="res://gamepieces/characters/bob.atlastex" id="2_s14we"]
+
+[resource]
+script = ExtResource("1_s14we")
+name = "Bob"
+texture = ExtResource("2_s14we")
+colour = Color(0.9019608, 0.14117648, 0.27058825, 1)
+metadata/_custom_type_script = "uid://bexn684efuhpn"

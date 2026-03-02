@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Character" format=3 uid="uid://ckflk3jgadjs3"]
+
+[ext_resource type="Script" uid="uid://bexn684efuhpn" path="res://gamepieces/characters/character.gd" id="1_v2v6w"]
+[ext_resource type="Texture2D" uid="uid://b4mimfmdatoi" path="res://gamepieces/characters/player.atlastex" id="2_6x6p8"]
+
+[resource]
+script = ExtResource("1_v2v6w")
+name = "Player"
+texture = ExtResource("2_6x6p8")
+colour = Color(0, 0.94684047, 0.9516317, 1)
+metadata/_custom_type_script = "uid://bexn684efuhpn"

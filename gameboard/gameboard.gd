@@ -1,3 +1,4 @@
+@icon("res://gameboard/icon_map.png")
 class_name Gameboard extends TileMapLayer
 
 @onready var _walls: TileMapLayer = $Walls

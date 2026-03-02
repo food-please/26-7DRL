@@ -1,12 +1,13 @@
 [gd_scene format=4 uid="uid://cl7ctg7l4nm76"]
 
 [ext_resource type="Script" uid="uid://di4phyoupukhf" path="res://main.gd" id="1_ig7tw"]
-[ext_resource type="PackedScene" uid="uid://dyva2ygdhyy5a" path="res://characters/gamepiece.tscn" id="2_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://dyva2ygdhyy5a" path="res://gamepieces/gamepiece.tscn" id="2_0xm2m"]
 [ext_resource type="Script" uid="uid://bmxuhj3om1yas" path="res://gameboard/gameboard.gd" id="2_1bvp3"]
 [ext_resource type="TileSet" uid="uid://cmwbs5pe8blsp" path="res://gameboard/test_tileset.tres" id="2_lquwl"]
 [ext_resource type="Script" uid="uid://cup6wq7xwolu5" path="res://controllers/player_controller.gd" id="3_h2yge"]
-[ext_resource type="Texture2D" uid="uid://b4mimfmdatoi" path="res://characters/player/player.atlastex" id="5_7mycd"]
-[ext_resource type="Texture2D" uid="uid://3t11rrg0vpx4" path="res://characters/bob.atlastex" id="6_272bh"]
+[ext_resource type="Script" uid="uid://cqy0bc0uwtoab" path="res://gamepieces/gamepiece_registry.gd" id="4_5vw27"]
+[ext_resource type="Resource" uid="uid://ckflk3jgadjs3" path="res://gamepieces/characters/player.char.tres" id="5_7mycd"]
+[ext_resource type="Resource" uid="uid://ccsm0d80dmsjp" path="res://gamepieces/characters/bob.char.tres" id="6_272bh"]
 
 [node name="Main" type="Node2D" unique_id=1500830702]
 scale = Vector2(2, 2)
@@ -20,27 +21,32 @@ script = ExtResource("2_1bvp3")
 metadata/_edit_lock_ = true
 
 [node name="Walls" type="TileMapLayer" parent="Gameboard" unique_id=494184159]
-tile_map_data = PackedByteArray("AAAAAAQAAAAAAAEAAAABAAQAAAAAAAEAAAACAAQAAAAAAAEAAAADAAQAAAAAAAEAAAAEAAQAAAAAAAEAAAAFAAQAAAAAAAEAAAAGAAQAAAAAAAEAAAAHAAQAAAAAAAEAAAAIAAQAAAAAAAEAAAAJAAQAAAAAAAEAAAAKAAQAAAAAAAEAAAALAAQAAAAAAAEAAAAMAAQAAAAAAAEAAAANAAQAAAAAAAEAAAAPAAEAAAAAAAEAAAAPAAIAAAAAAAEAAAA=")
+tile_map_data = PackedByteArray("AAAAAAQAAAAAAAEAAAABAAQAAAAAAAEAAAADAAQAAAAAAAEAAAAEAAQAAAAAAAEAAAAFAAQAAAAAAAEAAAAGAAQAAAAAAAEAAAAHAAQAAAAAAAEAAAAIAAQAAAAAAAEAAAAJAAQAAAAAAAEAAAAKAAQAAAAAAAEAAAALAAQAAAAAAAEAAAAMAAQAAAAAAAEAAAANAAQAAAAAAAEAAAAPAAEAAAAAAAEAAAAPAAIAAAAAAAEAAAACAAQAAAAAAAEAAAA=")
 tile_set = ExtResource("2_lquwl")
 
+[node name="PlayerStart" type="Marker2D" parent="Gameboard" unique_id=915694648]
+position = Vector2(108.5, 12.5)
+
 [node name="Gamepieces" type="Node2D" parent="Gameboard" unique_id=843069626]
+script = ExtResource("4_5vw27")
 metadata/_edit_lock_ = true
 
-[node name="Character" parent="Gameboard/Gamepieces" unique_id=1484078654 instance=ExtResource("2_0xm2m")]
-position = Vector2(109, 28)
-
-[node name="Sprite2D2" type="Sprite2D" parent="Gameboard/Gamepieces/Character" unique_id=663428652]
-modulate = Color(0.48235294, 0.5294118, 1, 1)
-texture = ExtResource("5_7mycd")
-
-[node name="Gamepiece" parent="Gameboard/Gamepieces" unique_id=349456477 instance=ExtResource("2_0xm2m")]
+[node name="Bob" parent="Gameboard/Gamepieces" unique_id=349456477 instance=ExtResource("2_0xm2m")]
 position = Vector2(72.5, 59.5)
+character = ExtResource("6_272bh")
 metadata/_edit_group_ = true
 
-[node name="Sprite2D2" type="Sprite2D" parent="Gameboard/Gamepieces/Gamepiece" unique_id=1312635632]
-modulate = Color(1, 0.33333334, 0.27450982, 1)
-texture = ExtResource("6_272bh")
+[node name="UI" type="CanvasLayer" parent="." unique_id=636737743]
 
-[node name="PlayerController" type="Node" parent="." unique_id=683714447 node_paths=PackedStringArray("focus")]
+[node name="Control" type="Control" parent="UI" unique_id=425116909]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="PlayerController" type="Node" parent="." unique_id=683714447 node_paths=PackedStringArray("gp_container", "player_start_position")]
 script = ExtResource("3_h2yge")
-focus = NodePath("../Gameboard/Gamepieces/Character")
+gp_container = NodePath("../Gameboard/Gamepieces")
+gamepiece_scene = ExtResource("2_0xm2m")
+player_character = ExtResource("5_7mycd")
+player_start_position = NodePath("../Gameboard/PlayerStart")

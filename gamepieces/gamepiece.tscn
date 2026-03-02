@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://dyva2ygdhyy5a"]
 
-[ext_resource type="Texture2D" uid="uid://b4mimfmdatoi" path="res://characters/player/player.atlastex" id="1_54qew"]
-[ext_resource type="Script" uid="uid://c2jhfolu8eul" path="res://characters/gamepiece.gd" id="1_qqr4u"]
+[ext_resource type="Script" uid="uid://c2jhfolu8eul" path="res://gamepieces/gamepiece.gd" id="1_qqr4u"]
 
 [node name="Gamepiece" type="Node2D" unique_id=1484078654]
 script = ExtResource("1_qqr4u")
@@ -12,8 +11,6 @@ offset_left = -4.0
 offset_top = -4.0
 offset_right = 4.0
 offset_bottom = 4.0
+color = Color(1, 1, 1, 0.47058824)
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=217212591]
-visible = false
-modulate = Color(1, 0.4117647, 0.3764706, 1)
-texture = ExtResource("1_54qew")
