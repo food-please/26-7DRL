@@ -33,10 +33,16 @@ func register(gamepiece: Gamepiece, cell: Vector2i) -> bool:
 	return true
 
 
-## I'm going to simulate the next several turns to get a list of actors, in order.
-#func tick() -> void:
-	#for gp: Gamepiece in get_children():
-		#gp.actor.tick()
+func next_turn() -> void:
+	var next_gp: = get_next_actor()
+	
+	if next_gp == null:
+		push_warning("Turn queue is running without any gamepieces!")
+	
+	# Wait for the actor to pass along its 'turn_ended' signal.
+	else:
+		next_gp.turn_ended.connect(next_turn, CONNECT_ONE_SHOT | CONNECT_DEFERRED)
+		next_gp.start_turn()
 
 
 func get_next_actor() -> Gamepiece:
@@ -89,6 +95,10 @@ func get_gamepieces() -> Array[Gamepiece]:
 	return _gamepieces.values()
 
 
+func is_cell_empty(cell: Vector2i) -> bool:
+	return get_gamepiece(cell) == null
+
+
 func _on_actor_charged(gp: Gamepiece) -> void:
 	_charged_actors.append(gp)
 
@@ -111,6 +121,7 @@ func _on_gamepiece_moved(old_cell: Vector2i, gp: Gamepiece) -> void:
 func _on_gamepiece_tree_exiting(gp: Gamepiece) -> void:
 	var cell = _gamepieces.find_key(gp)
 	if _gamepieces.has(cell):
+		print("Erasing %s from %s" % [gp.name, str(cell)])
 		_gamepieces.erase(cell)
 	
 	#if cell != null:

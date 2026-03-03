@@ -1,4 +1,4 @@
-extends Node
+extends GamepieceController
 
 @export var gp_container: Node
 @export var gamepiece_scene: PackedScene
@@ -6,7 +6,12 @@ extends Node
 @export var player_character: Character
 @export var player_start_position: Node2D
 
-var focus: Gamepiece
+#var is_active: = false:
+	#set(value):
+		#is_active = value
+		#print("Player controller is active? ", is_active)
+		#set_process_unhandled_input(is_active)
+
 
 
 func _ready() -> void:
@@ -14,14 +19,18 @@ func _ready() -> void:
 	assert(player_character != null, "PlayerController needs a Character to instantiate!")
 	assert(player_start_position != null, "PlayerController needs a position for the player!")
 	
-	focus = gamepiece_scene.instantiate()
-	focus.name = "Player"
-	focus.character = player_character
-	focus.position = player_start_position.position
-	gp_container.add_child(focus)
+	var new_gp: = gamepiece_scene.instantiate()
+	new_gp.name = "Player"
+	new_gp.character = player_character
+	new_gp.position = player_start_position.position
+	gp_container.add_child(new_gp)
+	
+	focus = new_gp
 	assert(focus is Gamepiece, "PlayerController could not instantiate a Gamepiece from the " +
 		"provided gamepiece_scene!")
 	assert(focus != null, "PlayerController failed to create the player!")
+	
+	player_start_position.queue_free()
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -48,6 +57,14 @@ func _unhandled_input(event: InputEvent) -> void:
 	
 	elif event.is_action_released("move_w"):
 		move(Directions.Points.W)
+	
+	#elif event.is_action_released("ui_accept"):
+		#focus.end_turn.call_deferred(1.0)
+
+
+func set_is_active(value: bool) -> void:
+	super.set_is_active(value)
+	set_process_unhandled_input(is_active)
 
 
 func move(direction: Directions.Points) -> bool:
@@ -62,9 +79,16 @@ func move(direction: Directions.Points) -> bool:
 		if occupant == null:
 			focus.cell = new_cell
 			focus.position = Map.gameboard.cell_to_px(new_cell)
+			
+			focus.end_turn.call_deferred(1.0)
 		
 		else:
-			print("Found something! Name: ", occupant.name)
+			var occupant_stats: = occupant.character.stats
+			var damage = focus.character.stats.attack - occupant_stats.defense
+			print("Found something! Name: ", occupant.name, " Attack for %d points." % damage)
+			
+			occupant.take_hit(damage)
+			focus.end_turn.call_deferred(1.0)
 	
 	else:
 		pass # Bump?

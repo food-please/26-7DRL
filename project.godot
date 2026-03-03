@@ -13,7 +13,7 @@ config_version=5
 config/name="7DRL"
 run/main_scene="uid://cl7ctg7l4nm76"
 config/features=PackedStringArray("4.6", "GL Compatibility")
-config/icon="res://icon.svg"
+config/icon="uid://cyhss01i7gdan"
 
 [autoload]
 
@@ -29,10 +29,6 @@ window/size/window_height_override=720
 window/stretch/mode="viewport"
 window/stretch/aspect="expand"
 window/stretch/scale_mode="integer"
-
-[editor_plugins]
-
-enabled=PackedStringArray("res://addons/script-ide/plugin.cfg")
 
 [input]
 
@@ -96,3 +92,4 @@ rendering_device/driver.windows="d3d12"
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
 environment/defaults/default_clear_color=Color(0.101960786, 0.101960786, 0.101960786, 1)
+2d/snap/snap_2d_transforms_to_pixel=true

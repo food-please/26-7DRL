@@ -1,16 +1,114 @@
 [gd_scene format=3 uid="uid://dyva2ygdhyy5a"]
 
 [ext_resource type="Script" uid="uid://c2jhfolu8eul" path="res://gamepieces/gamepiece.gd" id="1_qqr4u"]
+[ext_resource type="Texture2D" uid="uid://3t11rrg0vpx4" path="res://gamepieces/characters/bob.atlastex" id="2_4tpc3"]
+
+[sub_resource type="Animation" id="Animation_y5kog"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Anchor/Sprite2D:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Anchor:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_4tpc3"]
+resource_name = "die"
+length = 0.2
+step = 0.02
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Anchor/Sprite2D:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.02, 0.06, 0.1, 0.14, 0.17999999, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-2, 0), Vector2(2, 0), Vector2(-2, 0), Vector2(2, 0), Vector2(-2, 0), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Anchor:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.04, 0.08, 0.12, 0.16, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 0, 0, 1), Color(1, 1, 1, 1), Color(1, 0, 0, 1), Color(1, 1, 1, 0.5), Color(1, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_trdty"]
+resource_name = "hurt"
+length = 0.16
+step = 0.02
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Anchor/Sprite2D:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.02, 0.06, 0.1, 0.14, 0.16),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-2, 0), Vector2(2, 0), Vector2(-2, 0), Vector2(2, 0), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Anchor:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.04, 0.08, 0.12, 0.16),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 0, 0, 1), Color(1, 1, 1, 1), Color(1, 0, 0, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5i2ag"]
+_data = {
+&"RESET": SubResource("Animation_y5kog"),
+&"die": SubResource("Animation_4tpc3"),
+&"hurt": SubResource("Animation_trdty")
+}
 
 [node name="Gamepiece" type="Node2D" unique_id=1484078654]
 script = ExtResource("1_qqr4u")
 
 [node name="Background" type="ColorRect" parent="." unique_id=1380961214]
-visible = false
 offset_left = -4.0
 offset_top = -4.0
 offset_right = 4.0
 offset_bottom = 4.0
 color = Color(1, 1, 1, 0.47058824)
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=217212591]
+[node name="Anchor" type="Node2D" parent="." unique_id=2105223147]
+
+[node name="Sprite2D" type="Sprite2D" parent="Anchor" unique_id=217212591]
+texture = ExtResource("2_4tpc3")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1969681354]
+libraries/ = SubResource("AnimationLibrary_5i2ag")

@@ -1,0 +1,60 @@
+[gd_scene format=3 uid="uid://c4qxk2ce64jo2"]
+
+[ext_resource type="Texture2D" uid="uid://dgrc0y7aixori" path="res://ui/stat_bar/stat_bar_under.atlastex" id="1_gf30i"]
+[ext_resource type="Script" uid="uid://mvcax2qichmg" path="res://ui/stat_bar/stat_bar.gd" id="1_ify1a"]
+[ext_resource type="Theme" uid="uid://b247kh2ssbvfr" path="res://ui/default.theme" id="1_qgfod"]
+[ext_resource type="Texture2D" uid="uid://djejt3t3lab1l" path="res://ui/stat_bar/stat_bar_progress.atlastex" id="2_ify1a"]
+[ext_resource type="Texture2D" uid="uid://b5dv3vd7ba6y6" path="res://assets/dungeon-mode.png" id="4_f3842"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xg472"]
+atlas = ExtResource("4_f3842")
+region = Rect2(96, 64, 8, 8)
+margin = Rect2(-1, -1, -2, -2)
+
+[node name="StatBar" type="MarginContainer" unique_id=734484174]
+offset_right = 8.0
+offset_bottom = 8.0
+theme = ExtResource("1_qgfod")
+script = ExtResource("1_ify1a")
+bg_texture = ExtResource("1_gf30i")
+num_increments = 1
+
+[node name="Background" type="HBoxContainer" parent="." unique_id=174062932]
+modulate = Color(0.627451, 0.7019608, 0.69803923, 1)
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="BackgroundTexture4" type="TextureRect" parent="Background" unique_id=515030053]
+layout_mode = 2
+texture = ExtResource("1_gf30i")
+
+[node name="Value" type="TextureProgressBar" parent="." unique_id=659213312]
+custom_minimum_size = Vector2(8, 8)
+layout_mode = 2
+step = 100.0
+rounded = true
+nine_patch_stretch = true
+stretch_margin_left = 1
+stretch_margin_top = 1
+stretch_margin_right = 1
+stretch_margin_bottom = 1
+texture_over = SubResource("AtlasTexture_xg472")
+texture_progress = ExtResource("2_ify1a")
+tint_over = Color(0.15594886, 0.15594886, 0.15594886, 0)
+tint_progress = Color(0.29803923, 0.3137255, 0.40392157, 1)
+
+[node name="Offset" type="Control" parent="." unique_id=336412102]
+custom_minimum_size = Vector2(8, 8)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Offset" unique_id=1906447336]
+layout_mode = 0
+offset_top = 4.0
+offset_right = 32.0
+offset_bottom = 12.0
+theme_override_constants/margin_left = 8
+
+[node name="Label" type="Label" parent="Offset/MarginContainer" unique_id=1985450381]
+modulate = Color(0.9764706, 0.9607843, 0.8901961, 1)
+layout_mode = 2
+text = "HP:100/100"

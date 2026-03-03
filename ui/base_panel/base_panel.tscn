@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://dxpi6gguqpje"]
+
+[ext_resource type="Theme" uid="uid://b247kh2ssbvfr" path="res://ui/default.theme" id="1_khr3g"]
+[ext_resource type="Script" uid="uid://bxm4ojrdlqo8x" path="res://ui/base_panel/base_panel.gd" id="1_po106"]
+[ext_resource type="Texture2D" uid="uid://6y060er2xcvp" path="res://ui/base_panel/panel.atlastex" id="2_3mt3b"]
+
+[node name="BasePanel" type="PanelContainer" unique_id=1791830000]
+custom_minimum_size = Vector2(64, 32)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -576.0
+offset_bottom = -328.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_khr3g")
+script = ExtResource("1_po106")
+
+[node name="Borders" type="NinePatchRect" parent="." unique_id=1945970402]
+layout_mode = 2
+texture = ExtResource("2_3mt3b")
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="NameMargin" type="MarginContainer" parent="Borders" unique_id=2075987793]
+layout_mode = 0
+offset_right = 32.0
+offset_bottom = 8.0
+theme_override_constants/margin_left = 16
+
+[node name="ColorRect" type="ColorRect" parent="Borders/NameMargin" unique_id=1654340545]
+layout_mode = 2
+color = Color(0.101960786, 0.101960786, 0.101960786, 1)
+
+[node name="Label" type="Label" parent="Borders/NameMargin" unique_id=318035191]
+layout_mode = 2
+text = "Name"
+
+[node name="Contents" type="MarginContainer" parent="." unique_id=1214456597]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8

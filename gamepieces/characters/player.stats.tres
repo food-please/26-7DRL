@@ -4,5 +4,6 @@
 
 [resource]
 script = ExtResource("1_8dr7v")
+hp = 10
 initiative = 0.7
 metadata/_custom_type_script = "uid://b508xrh2wh14p"

@@ -1,6 +1,8 @@
 @icon("res://gameboard/icon_map.png")
 class_name Gameboard extends TileMapLayer
 
+@export_color_no_alpha var bg_color: Color
+
 @onready var _walls: TileMapLayer = $Walls
 
 ## Returns true if coordinate is found as a GraphCell coordinate in the graph.

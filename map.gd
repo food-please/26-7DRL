@@ -26,6 +26,8 @@ func setup(gp_manager: GamepieceRegistry, gb: Gameboard) -> void:
 	
 	gameboard = gb
 	gamepieces = gp_manager
+	
+	RenderingServer.set_default_clear_color(gb.bg_color)
 	references_set.emit()
 
 

@@ -9,5 +9,5 @@ script = ExtResource("1_s14we")
 name = "Bob"
 stats = ExtResource("2_3jp8p")
 texture = ExtResource("2_s14we")
-colour = Color(0.9019608, 0.14117648, 0.27058825, 1)
+colour = Color(0.85490197, 0.30588236, 0.5058824, 1)
 metadata/_custom_type_script = "uid://bexn684efuhpn"

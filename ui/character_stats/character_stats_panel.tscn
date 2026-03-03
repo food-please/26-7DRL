@@ -1,0 +1,107 @@
+[gd_scene format=3 uid="uid://0irrsmuv5fqw"]
+
+[ext_resource type="Theme" uid="uid://b247kh2ssbvfr" path="res://ui/default.theme" id="1_uj1b8"]
+[ext_resource type="Script" uid="uid://b8sygba14qltr" path="res://ui/character_stats/character_stats_panel.gd" id="2_e0dfd"]
+[ext_resource type="Texture2D" uid="uid://6y060er2xcvp" path="res://ui/base_panel/panel.atlastex" id="3_grvq1"]
+[ext_resource type="PackedScene" uid="uid://c4qxk2ce64jo2" path="res://ui/stat_bar/stat_bar.tscn" id="4_e0dfd"]
+[ext_resource type="Texture2D" uid="uid://d3x6iahlu8pku" path="res://ui/character_stats/attack_icon.atlastex" id="5_88roa"]
+[ext_resource type="Texture2D" uid="uid://cq0tcwe26n6tw" path="res://ui/character_stats/defense_icon.atlastex" id="6_5vldr"]
+
+[node name="CharacterStats" type="PanelContainer" unique_id=1791830000]
+custom_minimum_size = Vector2(64, 24)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -576.0
+offset_bottom = -336.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_uj1b8")
+script = ExtResource("2_e0dfd")
+
+[node name="Background" type="ColorRect" parent="." unique_id=1786089384]
+layout_mode = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Borders" type="NinePatchRect" parent="." unique_id=1945970402]
+self_modulate = Color(0.9764706, 0.9607843, 0.8901961, 1)
+layout_mode = 2
+texture = ExtResource("3_grvq1")
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="NameMargin" type="MarginContainer" parent="Borders" unique_id=2075987793]
+layout_mode = 0
+offset_right = 32.0
+offset_bottom = 8.0
+theme_override_constants/margin_left = 16
+
+[node name="ColorRect" type="ColorRect" parent="Borders/NameMargin" unique_id=1654340545]
+layout_mode = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Label" type="Label" parent="Borders/NameMargin" unique_id=318035191]
+layout_mode = 2
+text = "Title"
+
+[node name="Contents" type="MarginContainer" parent="." unique_id=1214456597]
+custom_minimum_size = Vector2(8, 8)
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Contents" unique_id=463872654]
+layout_mode = 2
+theme_override_constants/separation = 1
+
+[node name="TopPadding" type="Control" parent="Contents/VBoxContainer" unique_id=1704425795]
+custom_minimum_size = Vector2(8, 2)
+layout_mode = 2
+
+[node name="HPBar" parent="Contents/VBoxContainer" unique_id=734484174 instance=ExtResource("4_e0dfd")]
+unique_name_in_owner = true
+layout_mode = 2
+num_increments = 10
+
+[node name="BottomPadding" type="Control" parent="Contents/VBoxContainer" unique_id=1368867035]
+custom_minimum_size = Vector2(8, 4)
+layout_mode = 2
+
+[node name="Stats" type="HBoxContainer" parent="Contents/VBoxContainer" unique_id=1379283838]
+modulate = Color(0.9764706, 0.9607843, 0.8901961, 1)
+custom_minimum_size = Vector2(0, 8)
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="AttackContainer" type="HBoxContainer" parent="Contents/VBoxContainer/Stats" unique_id=1290211368]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="AttackIcon" type="TextureRect" parent="Contents/VBoxContainer/Stats/AttackContainer" unique_id=1296163836]
+layout_mode = 2
+texture = ExtResource("5_88roa")
+
+[node name="AttackValue" type="Label" parent="Contents/VBoxContainer/Stats/AttackContainer" unique_id=319155550]
+unique_name_in_owner = true
+layout_mode = 2
+text = "90"
+
+[node name="DefenseContainer" type="HBoxContainer" parent="Contents/VBoxContainer/Stats" unique_id=1563137728]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="DefenseIcon" type="TextureRect" parent="Contents/VBoxContainer/Stats/DefenseContainer" unique_id=1421780779]
+layout_mode = 2
+texture = ExtResource("6_5vldr")
+
+[node name="DefenseValue" type="Label" parent="Contents/VBoxContainer/Stats/DefenseContainer" unique_id=1602038397]
+unique_name_in_owner = true
+layout_mode = 2
+text = "90"

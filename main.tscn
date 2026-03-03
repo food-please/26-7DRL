@@ -8,6 +8,8 @@
 [ext_resource type="Script" uid="uid://cqy0bc0uwtoab" path="res://gamepieces/gamepiece_registry.gd" id="4_5vw27"]
 [ext_resource type="Resource" uid="uid://ckflk3jgadjs3" path="res://gamepieces/characters/player.char.tres" id="5_7mycd"]
 [ext_resource type="Resource" uid="uid://ccsm0d80dmsjp" path="res://gamepieces/characters/bob.char.tres" id="6_272bh"]
+[ext_resource type="Script" uid="uid://co2ndnote7hhu" path="res://controllers/wander_controller.gd" id="7_kek77"]
+[ext_resource type="PackedScene" uid="uid://0irrsmuv5fqw" path="res://ui/character_stats/character_stats_panel.tscn" id="8_4c57u"]
 
 [node name="Main" type="Node2D" unique_id=1500830702]
 scale = Vector2(2, 2)
@@ -18,6 +20,7 @@ metadata/_edit_lock_ = true
 tile_map_data = PackedByteArray("AAABAAIAAAAAAAsAAAACAAIAAAAAAAsAAAADAAIAAAAAAAsAAAAEAAIAAAAAAAsAAAAFAAIAAAAAAAsAAAAGAAIAAAAAAAsAAAAHAAIAAAAAAAsAAAAIAAIAAAAAAAsAAAAJAAIAAAAAAAsAAAAKAAIAAAAAAAsAAAALAAIAAAAAAAsAAAAMAAIAAAAAAAsAAAANAAIAAAAAAAsAAAANAAEAAAAAAAsAAAAOAAEAAAAAAAsAAAAPAAEAAAAAAAsAAAAQAAEAAAAAAAsAAAAQAAIAAAAAAAsAAAAQAAMAAAAAAAsAAAAPAAMAAAAAAAsAAAAPAAIAAAAAAAsAAAAOAAIAAAAAAAsAAAANAAMAAAAAAAsAAAAOAAMAAAAAAAsAAAAOAAQAAAAAAAsAAAAOAAUAAAAAAAsAAAAOAAYAAAAAAAsAAAAOAAcAAAAAAAsAAAAOAAgAAAAAAAsAAAANAAgAAAAAAAsAAAANAAkAAAAAAAsAAAAMAAgAAAAAAAsAAAALAAcAAAAAAAsAAAAKAAcAAAAAAAsAAAAKAAYAAAAAAAsAAAAJAAYAAAAAAAsAAAAJAAUAAAAAAAsAAAAIAAUAAAAAAAsAAAAIAAYAAAAAAAsAAAAHAAYAAAAAAAsAAAAHAAcAAAAAAAsAAAAGAAcAAAAAAAsAAAAGAAgAAAAAAAsAAAAFAAgAAAAAAAsAAAAFAAkAAAAAAAsAAAAFAAoAAAAAAAsAAAAGAAoAAAAAAAsAAAAGAAsAAAAAAAsAAAAGAAwAAAAAAAsAAAAHAAwAAAAAAAsAAAAHAA0AAAAAAAsAAAAGAA4AAAAAAAsAAAAGAA8AAAAAAAsAAAAGAA0AAAAAAAsAAAAGAAkAAAAAAAsAAAAHAAgAAAAAAAsAAAAIAAgAAAAAAAsAAAAJAAgAAAAAAAsAAAAJAAcAAAAAAAsAAAAIAAcAAAAAAAsAAAA=")
 tile_set = ExtResource("2_lquwl")
 script = ExtResource("2_1bvp3")
+bg_color = Color(0.15686275, 0.15686275, 0.15686275, 1)
 metadata/_edit_lock_ = true
 
 [node name="Walls" type="TileMapLayer" parent="Gameboard" unique_id=494184159]
@@ -36,13 +39,24 @@ position = Vector2(72.5, 59.5)
 character = ExtResource("6_272bh")
 metadata/_edit_group_ = true
 
+[node name="WanderController" type="Node" parent="Gameboard/Gamepieces/Bob" unique_id=2050237217]
+script = ExtResource("7_kek77")
+
 [node name="UI" type="CanvasLayer" parent="." unique_id=636737743]
 
-[node name="Control" type="Control" parent="UI" unique_id=425116909]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="Border" type="MarginContainer" parent="UI" unique_id=616568716]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="CharacterStats" parent="UI/Border" unique_id=1791830000 instance=ExtResource("8_4c57u")]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
 
 [node name="PlayerController" type="Node" parent="." unique_id=683714447 node_paths=PackedStringArray("gp_container", "player_start_position")]
 script = ExtResource("3_h2yge")
